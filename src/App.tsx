@@ -1,50 +1,60 @@
+interface IStatBlockProps {
+  name: string;
+  value: string;
+}
+
 const data = [
   { name: "companies", value: "10k+" },
   { name: "templates", value: "314" },
   { name: "queries", value: "12M+" },
 ];
 
-function StatBlock({ name, value }: any) {
+const StatBlock = (props: IStatBlockProps) => {
+  const { name, value } = props;
   return (
-    <div className="flex flex-col">
-      <h5 className="mb-1 text-xl font-bold text-white">{value}</h5>
-      <p className="text-xs uppercase text-white300">{name}</p>
+    <div className="flex flex-col py-3 xl:py-0">
+      <p className="mb-1 text-2xl font-bold text-white">{value}</p>
+      <p className="text-sm uppercase text-white-300">{name}</p>
     </div>
   );
-}
+};
 
-function App() {
+const App = () => {
   return (
-    <div className="flex max-w-[75%] flex-col overflow-hidden rounded-xl bg-darkDesaturatedBlue 2k:flex-row-reverse">
-      <div className="flex w-1/2 flex-col bg-softViolet max-2k:w-[500px] max-sm:w-[350px] max-small:w-[100%]">
-        <img
-          src="./image-header-mobile.jpg"
-          alt="Header"
-          className="block h-[100%] w-[100%] opacity-75 mix-blend-multiply small:hidden"
-        />
-        <img
-          src="./image-header-desktop.jpg"
-          alt="Header"
-          className="hidden h-[100%] w-[100%] opacity-75 mix-blend-multiply small:block"
-        />
-      </div>
-      <div className="flex w-1/2 flex-col p-10 text-left max-2k:w-[500px] max-sm:w-[350px] max-small:w-[100%] max-small:text-center sm:p-20">
-        <h1 className="mb-8 text-3xl font-bold text-white">
-          Get <span className="text-softViolet">insights</span> that help your
-          business grow.
-        </h1>
-        <p className="mb-16 text-white200">
+    <article className="flex h-[780px] w-[327px] flex-col overflow-hidden rounded-lg bg-dark-desaturated-blue xl:h-[450px] xl:w-[1110px] xl:flex-row-reverse">
+      <section className="w-full bg-soft-violet">
+        <picture>
+          <source
+            srcSet="./image-header-desktop.jpg"
+            media="(min-width: 768px)"
+          />
+          <img
+            src="./image-header-mobile.jpg"
+            alt="Header"
+            className="h-full w-full opacity-75 mix-blend-multiply"
+          />
+        </picture>
+      </section>
+      <section className="flex w-full flex-col px-8 py-10 text-center xl:p-16 xl:text-left">
+        <header>
+          <h1 className="text-[28px] font-bold leading-tight text-white xl:text-4xl">
+            Get <span className="text-soft-violet">insights</span> that help
+            your business grow.
+          </h1>
+        </header>
+
+        <p className="py-4 text-white-200 xl:max-w-[350px] xl:py-8">
           Discover the benefits of data analytics and make better decisions
           regarding revenue, customer experience, and overall efficiency.
         </p>
-        <div className="flex flex-row justify-between max-small:flex-col">
+        <section className="flex flex-col xl:mt-12 xl:max-w-[350px] xl:flex-row xl:justify-between">
           {data.map((item) => (
             <StatBlock key={item.name} {...item} />
           ))}
-        </div>
-      </div>
-    </div>
+        </section>
+      </section>
+    </article>
   );
-}
+};
 
 export default App;
